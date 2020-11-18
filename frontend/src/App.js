@@ -16,10 +16,10 @@ function App() {
           <Route path="/view" component={View} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <ProtectedRoute
+          {/* <ProtectedRoute
             path="/dashboard"
             component={Dashboard}
-          ></ProtectedRoute>
+          ></ProtectedRoute> */}
         </Switch>
       </Router>
     </div>

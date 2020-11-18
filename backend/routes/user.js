@@ -55,7 +55,7 @@ router.post("/register2", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   console.log(req.body);
-  const { name, email, password } = req.body;
+  const { name, email, password, dateOfBirth } = req.body;
   try {
     const user = await User.findOne({ email: req.body.email });
     console.log(12313, user);
@@ -72,6 +72,7 @@ router.post("/register", async (req, res) => {
       name: name,
       email: email,
       hash: hashedPassword,
+      dateOfBirth,
     });
     console.log("user saved");
     res.status(200).send({ success: true, message: "User registered" });
@@ -105,6 +106,7 @@ router.post("/login", async (req, res) => {
           })
           .send({ msg: "cookies sendet" });
       } else {
+        res.status(400).send("Password is not correct");
         throw "Password is not Correct";
       }
     }
