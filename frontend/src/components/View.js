@@ -125,28 +125,28 @@ export default function View() {
     }
     console.log(data);
 
-    // fetch(
-    //   "http://localhost:3002/dashboard/edit",
-    //   {
-    //     method: "POST",
-    //     credentials: "include",
-    //   },
-    //   data
-    // )
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((res) => {
-    //     console.log("User Updated");
-    //     setView({ email: "updated", name: "updated" });
-    //     // setTimeout(() => {
-    //     //   history.push("/login");
-    //     // }, 5000);
-    //   })
-    //   .catch((err) => {
-    //     history.push("/login");
-    //     console.log(err);
-    //   });
+    fetch("http://localhost:3002/dashboard/edit", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(data),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log("User Updated");
+        setView({ email: "updated", name: "updated" });
+        // setTimeout(() => {
+        //   history.push("/login");
+        // }, 5000);
+      })
+      .catch((err) => {
+        history.push("/login");
+        console.log(err);
+      });
   };
 
   return (
@@ -159,7 +159,7 @@ export default function View() {
         <Typography component="h1" variant="h5">
           Your Details
         </Typography>
-        <form className={classes.form} noValidate onSubmit={updateUser}>
+        <form onSubmit={updateUser} className={classes.form} noValidate>
           {view.edit ? (
             <>
               <TextField
@@ -250,7 +250,8 @@ export default function View() {
                 color="primary"
                 className={classes.button}
                 startIcon={<SaveIcon />}
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   const neu = { ...view, edit: true };
                   console.log(neu);
                   setView(neu);
