@@ -6,52 +6,10 @@ const bcrypt = require("bcrypt");
 const jwtIssuer = require("../utils/jwtIssuer");
 
 router.get("/", (req, res) => {
-  res.send("INside user route");
+  res.send("Inside user route");
 });
 
-router.post("/register2", async (req, res) => {
-  console.log(req.body);
-
-  /* User.findOne({ email: req.body.email })
-    .then((data) => {
-      if (data) {
-        res.send("This email is already in use");
-      } else {
-        const { name, email, password } = req.body;
-        let hashedPassword=
-        await bcrypt.hash(password, 10, (err, hash) => {
-          if (err) {
-            console.log(err, "hashing problem in bcrypt");
-          } else {
-            console.log(hash);
-            hashedPassword = hash;
-          }
-        });
-        const clearData = {
-          name: name,
-          email: email,
-          hash: hashedPassword,
-        };
-        console.log(clearData);
-
-        // const newUser = new User(req.body);
-        // newUser
-        //   .save()
-        //   .then(() => {
-        //     console.log("user saved");
-        //     res.status(200).send("User registered");
-        //   })
-        //   .catch((err) => {});
-      }
-    })
-    .catch((err) => {
-      console.log("user is not registered, because of error", err);
-
-      res.status(400).send("user is not registered, because of error", err);
-    }); */
-});
-
-///////////////Franco
+///////////////Register
 
 router.post("/register", async (req, res) => {
   console.log(req.body);
@@ -80,7 +38,7 @@ router.post("/register", async (req, res) => {
     res.status(500).send({ success: false, message: error });
   }
 });
-
+///Login
 router.post("/login", async (req, res) => {
   console.log(req.body);
   const { email, password } = req.body;

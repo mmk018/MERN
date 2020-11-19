@@ -1,18 +1,17 @@
 const router = require("express").Router();
 const passport = require("passport");
 const User = require("../Model/UserModel");
-
-//post or get
+///Read
 router.get(
   "/view",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("after passport ", req.user);
 
-    /* res.send("view access approved"); */
     res.send(req.user);
   }
 );
+//Update
 router.post(
   "/edit",
   passport.authenticate("jwt", { session: false }),
@@ -39,6 +38,7 @@ router.post(
     );
   }
 );
+//Delete
 router.post(
   "/delete",
   passport.authenticate("jwt", { session: false }),
